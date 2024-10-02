@@ -1,0 +1,28 @@
+##### Admin Entity
+
+### Obtener todos los admins
+GET http://localhost:3000/api/admin
+
+### Obtener un admin por ID
+GET http://localhost:3000/api/admin/1
+
+### Crear un nuevo admin
+POST http://localhost:3000/api/admin
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin123"
+}
+
+### Actualizar un admin por ID
+PUT http://localhost:3000/api/admin/1
+Content-Type: application/json
+
+{
+  "email": "updatedadmin@example.com",
+  "password": "updatedadmin123"
+}
+
+### Eliminar un admin por ID
+DELETE http://localhost:3000/api/admin/1

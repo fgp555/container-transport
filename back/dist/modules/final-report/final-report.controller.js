@@ -16,6 +16,9 @@ exports.FinalReportController = void 0;
 const common_1 = require("@nestjs/common");
 const final_report_service_1 = require("./final-report.service");
 const final_report_entity_1 = require("./entity-dtos/final-report.entity");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const fs = require("fs-extra");
 let FinalReportController = class FinalReportController {
     constructor(finalReportService) {
         this.finalReportService = finalReportService;
@@ -26,11 +29,11 @@ let FinalReportController = class FinalReportController {
     findOne(id) {
         return this.finalReportService.findOne(id);
     }
-    create(finalReport) {
-        return this.finalReportService.create(finalReport);
+    create(finalReport, images) {
+        return this.finalReportService.create(finalReport, images);
     }
-    update(id, finalReport) {
-        return this.finalReportService.update(id, finalReport);
+    update(id, finalReport, images) {
+        return this.finalReportService.update(id, finalReport, images);
     }
     remove(id) {
         return this.finalReportService.remove(id);
@@ -52,17 +55,49 @@ __decorate([
 ], FinalReportController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('images', 10, {
+        storage: (0, multer_1.diskStorage)({
+            destination: async (req, file, callback) => {
+                const uploadPath = './uploads/images';
+                await fs.ensureDir(uploadPath);
+                callback(null, uploadPath);
+            },
+            filename: (req, file, callback) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+                const fileExt = file.originalname.split('.').pop();
+                const filename = `${file.fieldname}-${uniqueSuffix}.${fileExt}`;
+                callback(null, filename);
+            },
+        }),
+    })),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFiles)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [final_report_entity_1.FinalReportEntity]),
+    __metadata("design:paramtypes", [final_report_entity_1.FinalReportEntity, Array]),
     __metadata("design:returntype", void 0)
 ], FinalReportController.prototype, "create", null);
 __decorate([
     (0, common_1.Put)(':id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FilesInterceptor)('images', 10, {
+        storage: (0, multer_1.diskStorage)({
+            destination: async (req, file, callback) => {
+                const uploadPath = './uploads/images';
+                await fs.ensureDir(uploadPath);
+                callback(null, uploadPath);
+            },
+            filename: (req, file, callback) => {
+                const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+                const fileExt = file.originalname.split('.').pop();
+                const filename = `${file.fieldname}-${uniqueSuffix}.${fileExt}`;
+                callback(null, filename);
+            },
+        }),
+    })),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.UploadedFiles)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, final_report_entity_1.FinalReportEntity]),
+    __metadata("design:paramtypes", [Number, final_report_entity_1.FinalReportEntity, Array]),
     __metadata("design:returntype", void 0)
 ], FinalReportController.prototype, "update", null);
 __decorate([

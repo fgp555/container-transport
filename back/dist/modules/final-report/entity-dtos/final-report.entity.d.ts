@@ -8,5 +8,5 @@ export declare class FinalReportEntity {
     remarks: string;
     pallet: string;
     legend: string;
-    images: ImageEntity[];
+    images?: ImageEntity[];
 }

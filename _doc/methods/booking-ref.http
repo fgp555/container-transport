@@ -1,0 +1,32 @@
+### Obtener todas las referencias de reserva (BookingRef)
+GET http://localhost:3000/api/booking-ref
+
+### Obtener una referencia de reserva por ID
+GET http://localhost:3000/api/booking-ref/1
+
+### Crear una nueva referencia de reserva
+POST http://localhost:3000/api/booking-ref
+Content-Type: application/json
+
+{
+  "number": "HAME90065700",
+  "shipmentDate": "2024-05-08T00:00:00.000Z",
+  "receiptDate": "2024-05-09T00:00:00.000Z",
+  "from": "New York",
+  "to": "Londres"
+}
+
+### Actualizar una referencia de reserva por ID
+PUT http://localhost:3000/api/booking-ref/1
+Content-Type: application/json
+
+{
+  "number": "HAME90065701",
+  "shipmentDate": "2024-05-09T00:00:00.000Z",
+  "receiptDate": "2024-05-10T00:00:00.000Z",
+  "from": "Los Angeles",
+  "to": "Paris"
+}
+
+### Eliminar una referencia de reserva por ID
+DELETE http://localhost:3000/api/booking-ref/1

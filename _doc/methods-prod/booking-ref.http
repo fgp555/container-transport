@@ -1,11 +1,11 @@
 ### Obtener todas las referencias de reserva (BookingRef)
-GET http://localhost:3000/booking-ref
+GET http://api.1rodemayo.com/api/booking-ref
 
 ### Obtener una referencia de reserva por ID
-GET http://localhost:3000/booking-ref/1
+GET http://api.1rodemayo.com/api/booking-ref/1
 
 ### Crear una nueva referencia de reserva
-POST http://localhost:3000/booking-ref
+POST http://api.1rodemayo.com/api/booking-ref
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Actualizar una referencia de reserva por ID
-PUT http://localhost:3000/booking-ref/1
+PUT http://api.1rodemayo.com/api/booking-ref/1
 Content-Type: application/json
 
 {
@@ -29,4 +29,4 @@ Content-Type: application/json
 }
 
 ### Eliminar una referencia de reserva por ID
-DELETE http://localhost:3000/booking-ref/1
+DELETE http://api.1rodemayo.com/api/booking-ref/1

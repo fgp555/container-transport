@@ -5,7 +5,7 @@ export declare class FinalReportController {
     constructor(finalReportService: FinalReportService);
     findAll(): Promise<FinalReportEntity[]>;
     findOne(id: number): Promise<FinalReportEntity>;
-    create(finalReport: FinalReportEntity): Promise<FinalReportEntity>;
-    update(id: number, finalReport: FinalReportEntity): Promise<FinalReportEntity>;
+    create(finalReport: FinalReportEntity, images: Express.Multer.File[]): Promise<FinalReportEntity>;
+    update(id: number, finalReport: FinalReportEntity, images: Express.Multer.File[]): Promise<FinalReportEntity>;
     remove(id: number): Promise<void>;
 }

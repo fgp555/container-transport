@@ -1,11 +1,11 @@
 ### Obtener todas las imágenes
-GET http://localhost:3000/image
+GET http://localhost:3000/api/image
 
 ### Obtener una imagen por ID
-GET http://localhost:3000/image/1
+GET http://localhost:3000/api/image/1
 
 ### Crear una nueva imagen
-POST http://localhost:3000/image
+POST http://localhost:3000/api/image
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Actualizar una imagen por ID
-PUT http://localhost:3000/image/1
+PUT http://localhost:3000/api/image/1
 Content-Type: application/json
 
 {
@@ -21,4 +21,4 @@ Content-Type: application/json
 }
 
 ### Eliminar una imagen por ID
-DELETE http://localhost:3000/image/1
+DELETE http://localhost:3000/api/image/1

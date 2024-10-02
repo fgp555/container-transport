@@ -11,13 +11,6 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
-const admin_entity_1 = require("./modules/admin/entity-dtos/admin.entity");
-const booking_ref_entity_1 = require("./modules/booking-ref/entity-dtos/booking-ref.entity");
-const container_entity_1 = require("./modules/container/entity-dtos/container.entity");
-const client_entity_1 = require("./modules/client/entity-dtos/client.entity");
-const package_entity_1 = require("./modules/package/entity-dtos/package.entity");
-const image_entity_1 = require("./modules/image/entity-dtos/image.entity");
-const final_report_entity_1 = require("./modules/final-report/entity-dtos/final-report.entity");
 const admin_controller_1 = require("./modules/admin/admin.controller");
 const admin_service_1 = require("./modules/admin/admin.service");
 const booking_ref_controller_1 = require("./modules/booking-ref/booking-ref.controller");
@@ -33,31 +26,29 @@ const image_service_1 = require("./modules/image/image.service");
 const package_controller_1 = require("./modules/package/package.controller");
 const package_service_1 = require("./modules/package/package.service");
 const seeder_module_1 = require("./seed/seeder.module");
+const config_1 = require("@nestjs/config");
+const typeOrm_1 = require("./config/typeOrm");
+const admin_entity_1 = require("./modules/admin/entity-dtos/admin.entity");
+const booking_ref_entity_1 = require("./modules/booking-ref/entity-dtos/booking-ref.entity");
+const container_entity_1 = require("./modules/container/entity-dtos/container.entity");
+const client_entity_1 = require("./modules/client/entity-dtos/client.entity");
+const package_entity_1 = require("./modules/package/entity-dtos/package.entity");
+const image_entity_1 = require("./modules/image/entity-dtos/image.entity");
+const final_report_entity_1 = require("./modules/final-report/entity-dtos/final-report.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'mysql',
-                host: 'localhost',
-                port: 3306,
-                username: 'root',
-                password: '',
-                database: 'shipping_db',
-                entities: [
-                    admin_entity_1.AdminEntity,
-                    booking_ref_entity_1.BookingRefEntity,
-                    container_entity_1.ContainerEntity,
-                    client_entity_1.ClientEntity,
-                    package_entity_1.PackageEntity,
-                    image_entity_1.ImageEntity,
-                    final_report_entity_1.FinalReportEntity,
-                ],
-                synchronize: true,
-                logging: false,
-                dropSchema: true,
+            seeder_module_1.SeederModule,
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                load: [typeOrm_1.default],
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                inject: [config_1.ConfigService],
+                useFactory: (config) => config.get('typeorm'),
             }),
             typeorm_1.TypeOrmModule.forFeature([
                 admin_entity_1.AdminEntity,
@@ -68,7 +59,6 @@ exports.AppModule = AppModule = __decorate([
                 image_entity_1.ImageEntity,
                 final_report_entity_1.FinalReportEntity,
             ]),
-            seeder_module_1.SeederModule,
         ],
         controllers: [
             app_controller_1.AppController,

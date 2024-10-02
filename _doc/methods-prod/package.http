@@ -1,0 +1,28 @@
+### Obtener todos los paquetes
+GET http://api.1rodemayo.com/api/package
+
+### Obtener un paquete por ID
+GET http://api.1rodemayo.com/api/package/1
+
+### Crear un nuevo paquete
+POST http://api.1rodemayo.com/api/package
+Content-Type: application/json
+
+{
+  "description": "florero",
+  "cantidad": 2,
+  "client": 1
+}
+
+###??? Actualizar un paquete por ID
+PUT http://api.1rodemayo.com/api/package/1
+Content-Type: application/json
+
+{
+  "description": "florero actualizado",
+  "cantidad": 3,
+  "client": 1
+}
+
+### Eliminar un paquete por ID
+DELETE http://api.1rodemayo.com/api/package/1

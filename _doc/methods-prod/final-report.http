@@ -1,11 +1,11 @@
 ### Obtener todos los informes finales
-GET http://localhost:3000/final-report
+GET http://api.1rodemayo.com/api/final-report
 
 ### Obtener un informe final por ID
-GET http://localhost:3000/final-report/1
+GET http://api.1rodemayo.com/api/final-report/1
 
 ### Crear un nuevo informe final
-POST http://localhost:3000/final-report
+POST http://api.1rodemayo.com/api/final-report
 Content-Type: application/json
 
 {
@@ -20,7 +20,7 @@ Content-Type: application/json
 }
 
 ###??? Actualizar un informe final por ID
-PUT http://localhost:3000/final-report/1
+PUT http://api.1rodemayo.com/api/final-report/1
 Content-Type: application/json
 
 {
@@ -35,4 +35,4 @@ Content-Type: application/json
 }
 
 ### Eliminar un informe final por ID
-DELETE http://localhost:3000/final-report/1
+DELETE http://api.1rodemayo.com/api/final-report/1

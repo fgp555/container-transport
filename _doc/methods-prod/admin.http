@@ -1,13 +1,13 @@
 ##### Admin Entity
 
 ### Obtener todos los admins
-GET http://localhost:3000/admin
+GET http://api.1rodemayo.com/api/admin
 
 ### Obtener un admin por ID
-GET http://localhost:3000/admin/1
+GET http://api.1rodemayo.com/api/admin/1
 
 ### Crear un nuevo admin
-POST http://localhost:3000/admin
+POST http://api.1rodemayo.com/api/admin
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un admin por ID
-PUT http://localhost:3000/admin/1
+PUT http://api.1rodemayo.com/api/admin/1
 Content-Type: application/json
 
 {
@@ -25,4 +25,4 @@ Content-Type: application/json
 }
 
 ### Eliminar un admin por ID
-DELETE http://localhost:3000/admin/1
+DELETE http://api.1rodemayo.com/api/admin/1

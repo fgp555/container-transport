@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/component/layout.js"></script>
+
+    <title>Final Report CRUD</title>
+    <style>
+      /* Estilos para las tarjetas */
+      .report-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 10px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .report-card img {
+        max-width: 100px;
+        margin-right: 10px;
+      }
+      .report-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Final Report CRUD</h1>
+
+      <!-- Formulario para crear un nuevo informe -->
+      <h2>Create Final Report</h2>
+      <form id="create-form">
+        <input type="text" id="bLNo" placeholder="B/L No" value="BL123456" required /><br />
+        <input type="text" id="consignee" placeholder="Consignee" value="John Doe" required /><br />
+        <input type="text" id="marks" placeholder="Marks" value="Fragile" required /><br />
+        <input type="number" id="qtyPkgs" placeholder="Quantity Packages" value="10" required /><br />
+        <input type="text" id="remarks" placeholder="Remarks" value="Handle with care" /><br />
+        <input type="text" id="pallet" placeholder="Pallet" value="Pallet 1" /><br />
+        <input type="text" id="legend" placeholder="Legend" value="Legend text" /><br />
+        <input type="file" id="images" multiple accept="image/*" /><br />
+        <button type="submit">Create Report</button>
+      </form>
+
+      <hr />
+
+      <!-- Botón para obtener todos los informes -->
+      <h2>Get All Final Reports</h2>
+      <button id="get-reports-btn">Get All Reports</button>
+
+      <!-- Contenedor donde se mostrarán los informes -->
+      <div id="report-list" class="report-container"></div>
+
+      <hr />
+
+      <!-- Formulario para actualizar un informe -->
+      <h2>Update Final Report</h2>
+      <form id="update-form">
+        <input type="text" id="update-id" placeholder="ID to update" required /><br />
+        <input type="text" id="update-bLNo" placeholder="New B/L No" value="BL123456" required /><br />
+        <input type="text" id="update-consignee" placeholder="New Consignee" value="John Doe" required /><br />
+        <input type="text" id="update-marks" placeholder="New Marks" value="Fragile" required /><br />
+        <input type="number" id="update-qtyPkgs" placeholder="New Quantity Packages" value="10" required /><br />
+        <input type="text" id="update-remarks" placeholder="New Remarks" value="Handle with care" /><br />
+        <input type="text" id="update-pallet" placeholder="New Pallet" value="Pallet 1" /><br />
+        <input type="text" id="update-legend" placeholder="New Legend" value="Legend text" /><br />
+        <input type="file" id="update-images" multiple accept="image/*" /><br />
+        <button type="submit">Update Report</button>
+      </form>
+
+      <hr />
+
+      <!-- Formulario para eliminar un informe -->
+      <h2>Delete Final Report</h2>
+      <form id="delete-form">
+        <input type="text" id="delete-id" placeholder="ID to delete" required /><br />
+        <button type="submit">Delete Report</button>
+      </form>
+
+      <script>
+        // Base URL of the API
+        const apiUrlBase = "https://back.fgp.one";
+        const apiUrl = "https://back.fgp.one/final-report";
+
+        // Create Final Report
+        document.getElementById("create-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const bLNo = document.getElementById("bLNo").value;
+          const consignee = document.getElementById("consignee").value;
+          const marks = document.getElementById("marks").value;
+          const qtyPkgs = document.getElementById("qtyPkgs").value;
+          const remarks = document.getElementById("remarks").value;
+          const pallet = document.getElementById("pallet").value;
+          const legend = document.getElementById("legend").value;
+          const images = document.getElementById("images").files;
+
+          const formData = new FormData();
+          formData.append("bLNo", bLNo);
+          formData.append("consignee", consignee);
+          formData.append("marks", marks);
+          formData.append("qtyPkgs", qtyPkgs);
+          formData.append("remarks", remarks);
+          formData.append("pallet", pallet);
+          formData.append("legend", legend);
+          for (const file of images) {
+            formData.append("images", file);
+          }
+
+          try {
+            const response = await fetch(apiUrl, {
+              method: "POST",
+              body: formData,
+            });
+            const result = await response.json();
+            alert("Final Report Created!");
+            console.log(result);
+            loadReports(); // Reload the reports list
+          } catch (error) {
+            console.error("Error creating report:", error);
+          }
+        });
+
+        // Function to load all Final Reports
+        async function loadReports() {
+          try {
+            const response = await fetch(apiUrl);
+            const reports = await response.json();
+
+            const reportList = document.getElementById("report-list");
+            reportList.innerHTML = ""; // Clear the list
+
+            reports.forEach((report) => {
+              const reportDiv = document.createElement("div");
+              reportDiv.className = "report-card";
+              reportDiv.innerHTML = `
+            <strong>ID:</strong> ${report.id} <br />
+            <strong>B/L No:</strong> ${report.bLNo} <br />
+            <strong>Consignee:</strong> ${report.consignee} <br />
+            <strong>Marks:</strong> ${report.marks} <br />
+            <strong>Quantity Packages:</strong> ${report.qtyPkgs} <br />
+            <strong>Remarks:</strong> ${report.remarks} <br />
+            <strong>Pallet:</strong> ${report.pallet} <br />
+            <strong>Legend:</strong> ${report.legend} <br />
+            <strong>Images:</strong> ${
+              report.images && report.images.length > 0 ? report.images.map((img) => `<img src="${apiUrlBase + "/" + img.path}" alt="Image" />`).join("") : "No images"
+            }
+          `;
+              reportList.appendChild(reportDiv);
+            });
+          } catch (error) {
+            console.error("Error loading reports:", error);
+          }
+        }
+
+        // Add event listener to the "Get All Reports" button
+        document.getElementById("get-reports-btn").addEventListener("click", function () {
+          loadReports(); // Load reports when the button is clicked
+        });
+
+        // Update Final Report
+        document.getElementById("update-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const id = document.getElementById("update-id").value;
+          const bLNo = document.getElementById("update-bLNo").value;
+          const consignee = document.getElementById("update-consignee").value;
+          const marks = document.getElementById("update-marks").value;
+          const qtyPkgs = document.getElementById("update-qtyPkgs").value;
+          const remarks = document.getElementById("update-remarks").value;
+          const pallet = document.getElementById("update-pallet").value;
+          const legend = document.getElementById("update-legend").value;
+          const images = document.getElementById("update-images").files;
+
+          const formData = new FormData();
+          formData.append("bLNo", bLNo);
+          formData.append("consignee", consignee);
+          formData.append("marks", marks);
+          formData.append("qtyPkgs", qtyPkgs);
+          formData.append("remarks", remarks);
+          formData.append("pallet", pallet);
+          formData.append("legend", legend);
+          for (const file of images) {
+            formData.append("images", file);
+          }
+
+          try {
+            const response = await fetch(`${apiUrl}/${id}`, {
+              method: "PUT",
+              body: formData,
+            });
+            const result = await response.json();
+            alert("Final Report Updated!");
+            console.log(result);
+            loadReports(); // Reload the reports list
+          } catch (error) {
+            console.error("Error updating report:", error);
+          }
+        });
+
+        // Delete Final Report
+        document.getElementById("delete-form").addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const id = document.getElementById("delete-id").value;
+
+          try {
+            const response = await fetch(`${apiUrl}/${id}`, {
+              method: "DELETE",
+            });
+            alert("Final Report Deleted!");
+            loadReports(); // Reload the reports list
+          } catch (error) {
+            console.error("Error deleting report:", error);
+          }
+        });
+      </script>
+    </main>
+  </body>
+</html>

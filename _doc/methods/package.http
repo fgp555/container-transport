@@ -1,11 +1,11 @@
 ### Obtener todos los paquetes
-GET http://localhost:3000/package
+GET http://localhost:3000/api/package
 
 ### Obtener un paquete por ID
-GET http://localhost:3000/package/1
+GET http://localhost:3000/api/package/1
 
 ### Crear un nuevo paquete
-POST http://localhost:3000/package
+POST http://localhost:3000/api/package
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 }
 
 ###??? Actualizar un paquete por ID
-PUT http://localhost:3000/package/1
+PUT http://localhost:3000/api/package/1
 Content-Type: application/json
 
 {
@@ -25,4 +25,4 @@ Content-Type: application/json
 }
 
 ### Eliminar un paquete por ID
-DELETE http://localhost:3000/package/1
+DELETE http://localhost:3000/api/package/1

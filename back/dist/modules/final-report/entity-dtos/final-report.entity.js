@@ -48,8 +48,7 @@ __decorate([
     __metadata("design:type", String)
 ], FinalReportEntity.prototype, "legend", void 0);
 __decorate([
-    (0, typeorm_1.ManyToMany)(() => image_entity_1.ImageEntity),
-    (0, typeorm_1.JoinTable)(),
+    (0, typeorm_1.OneToMany)(() => image_entity_1.ImageEntity, (image) => image.finalReport),
     __metadata("design:type", Array)
 ], FinalReportEntity.prototype, "images", void 0);
 exports.FinalReportEntity = FinalReportEntity = __decorate([

@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const final_report_entity_1 = require("./entity-dtos/final-report.entity");
+const image_entity_1 = require("../image/entity-dtos/image.entity");
 let FinalReportService = class FinalReportService {
-    constructor(finalReportRepository) {
+    constructor(finalReportRepository, imageRepository) {
         this.finalReportRepository = finalReportRepository;
+        this.imageRepository = imageRepository;
     }
     findAll() {
         return this.finalReportRepository.find({ relations: ['images'] });
@@ -27,21 +29,45 @@ let FinalReportService = class FinalReportService {
     findOne(id) {
         return this.finalReportRepository.findOne({ where: { id }, relations: ['images'] });
     }
-    create(finalReport) {
+    async create(finalReport, images) {
+        const savedImages = await this.saveImages(images);
+        finalReport.images = savedImages;
         return this.finalReportRepository.save(finalReport);
     }
-    async update(id, finalReport) {
+    async update(id, finalReport, images) {
+        const existingReport = await this.finalReportRepository.findOne({ where: { id }, relations: ['images'] });
+        if (!existingReport) {
+            throw new Error('FinalReport not found');
+        }
+        if (images && images.length > 0) {
+            await this.imageRepository.delete({ finalReport: existingReport });
+            const savedImages = await this.saveImages(images);
+            finalReport.images = savedImages;
+        }
+        else {
+            finalReport.images = existingReport.images;
+        }
         await this.finalReportRepository.update(id, finalReport);
         return this.findOne(id);
     }
     async remove(id) {
         await this.finalReportRepository.delete(id);
     }
+    async saveImages(files) {
+        const imageEntities = files.map(file => {
+            const image = new image_entity_1.ImageEntity();
+            image.path = file.path;
+            return image;
+        });
+        return this.imageRepository.save(imageEntities);
+    }
 };
 exports.FinalReportService = FinalReportService;
 exports.FinalReportService = FinalReportService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(final_report_entity_1.FinalReportEntity)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(image_entity_1.ImageEntity)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], FinalReportService);
 //# sourceMappingURL=final-report.service.js.map

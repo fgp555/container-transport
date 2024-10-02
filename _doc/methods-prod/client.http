@@ -1,0 +1,32 @@
+### Obtener todos los clientes
+GET http://api.1rodemayo.com/api/client
+
+### Obtener un cliente por ID
+GET http://api.1rodemayo.com/api/client/1
+
+### Crear un nuevo cliente
+POST http://api.1rodemayo.com/api/client
+Content-Type: application/json
+
+{
+  "name": "Cliente 1",
+  "email": "user@mail.com",
+  "phone": "54333444222",
+  "issuingCompany": "Company Iss1",
+  "receivingCompany": "Company Rec1"
+}
+
+### Actualizar un cliente por ID
+PUT http://api.1rodemayo.com/api/client/1
+Content-Type: application/json
+
+{
+  "name": "Cliente 1 Actualizado",
+  "email": "userupdated@mail.com",
+  "phone": "54333444333",
+  "issuingCompany": "Company Iss2",
+  "receivingCompany": "Company Rec2"
+}
+
+### Eliminar un cliente por ID
+DELETE http://api.1rodemayo.com/api/client/1

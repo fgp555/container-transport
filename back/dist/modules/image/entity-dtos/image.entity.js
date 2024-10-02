@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageEntity = void 0;
+const final_report_entity_1 = require("../../final-report/entity-dtos/final-report.entity");
 const typeorm_1 = require("typeorm");
 let ImageEntity = class ImageEntity {
 };
@@ -22,6 +23,10 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], ImageEntity.prototype, "path", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => final_report_entity_1.FinalReportEntity, (finalReport) => finalReport.images, { onDelete: 'CASCADE' }),
+    __metadata("design:type", final_report_entity_1.FinalReportEntity)
+], ImageEntity.prototype, "finalReport", void 0);
 exports.ImageEntity = ImageEntity = __decorate([
     (0, typeorm_1.Entity)()
 ], ImageEntity);

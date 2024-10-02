@@ -1,11 +1,11 @@
 ### Obtener todos los clientes
-GET http://localhost:3000/client
+GET http://localhost:3000/api/client
 
 ### Obtener un cliente por ID
-GET http://localhost:3000/client/1
+GET http://localhost:3000/api/client/1
 
 ### Crear un nuevo cliente
-POST http://localhost:3000/client
+POST http://localhost:3000/api/client
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Actualizar un cliente por ID
-PUT http://localhost:3000/client/1
+PUT http://localhost:3000/api/client/1
 Content-Type: application/json
 
 {
@@ -29,4 +29,4 @@ Content-Type: application/json
 }
 
 ### Eliminar un cliente por ID
-DELETE http://localhost:3000/client/1
+DELETE http://localhost:3000/api/client/1

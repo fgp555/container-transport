@@ -1,5 +1,5 @@
 import { ImageEntity } from 'src/modules/image/entity-dtos/image.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class FinalReportEntity {
@@ -27,7 +27,6 @@ export class FinalReportEntity {
   @Column({ name: 'legend' })
   legend: string;
 
-  @ManyToMany(() => ImageEntity)
-  @JoinTable()
-  images: ImageEntity[];
+  @OneToMany(() => ImageEntity, (image) => image.finalReport)
+  images?: ImageEntity[];
 }

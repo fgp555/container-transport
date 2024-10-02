@@ -1,0 +1,30 @@
+### Obtener todos los contenedores
+GET http://localhost:3000/api/container
+
+### Obtener un contenedor por ID
+GET http://localhost:3000/api/container/1
+
+### Crear un nuevo contenedor
+POST http://localhost:3000/api/container
+Content-Type: application/json
+
+{
+  "containerNo": "TRIU 867 293-5",
+  "bookingRef": 1,
+  "openingDate": "2024-05-06T00:00:00.000Z",
+  "closingDate": "2024-05-08T00:00:00.000Z"
+}
+
+### Actualizar un contenedor por ID
+PUT http://localhost:3000/api/container/1
+Content-Type: application/json
+
+{
+  "containerNo": "TRIU 867 293-6",
+  "bookingRef": 1,
+  "openingDate": "2024-05-07T00:00:00.000Z",
+  "closingDate": "2024-05-09T00:00:00.000Z"
+}
+
+### Eliminar un contenedor por ID
+DELETE http://localhost:3000/api/container/1

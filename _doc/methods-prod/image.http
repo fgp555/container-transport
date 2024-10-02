@@ -1,0 +1,24 @@
+### Obtener todas las imágenes
+GET http://api.1rodemayo.com/api/image
+
+### Obtener una imagen por ID
+GET http://api.1rodemayo.com/api/image/1
+
+### Crear una nueva imagen
+POST http://api.1rodemayo.com/api/image
+Content-Type: application/json
+
+{
+  "path": "/images/img.jpg"
+}
+
+### Actualizar una imagen por ID
+PUT http://api.1rodemayo.com/api/image/1
+Content-Type: application/json
+
+{
+  "path": "/images/img_updated.jpg"
+}
+
+### Eliminar una imagen por ID
+DELETE http://api.1rodemayo.com/api/image/1

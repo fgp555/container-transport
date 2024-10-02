@@ -1,0 +1,32 @@
+### Obtener todos los clientes
+GET http://localhost:3000/client
+
+### Obtener un cliente por ID
+GET http://localhost:3000/client/1
+
+### Crear un nuevo cliente
+POST http://localhost:3000/client
+Content-Type: application/json
+
+{
+  "name": "Cliente 1",
+  "email": "user@mail.com",
+  "phone": "54333444222",
+  "issuingCompany": "Company Iss1",
+  "receivingCompany": "Company Rec1"
+}
+
+### Actualizar un cliente por ID
+PUT http://localhost:3000/client/1
+Content-Type: application/json
+
+{
+  "name": "Cliente 1 Actualizado",
+  "email": "userupdated@mail.com",
+  "phone": "54333444333",
+  "issuingCompany": "Company Iss2",
+  "receivingCompany": "Company Rec2"
+}
+
+### Eliminar un cliente por ID
+DELETE http://localhost:3000/client/1

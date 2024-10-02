@@ -1,0 +1,28 @@
+### Obtener todos los paquetes
+GET http://localhost:3000/package
+
+### Obtener un paquete por ID
+GET http://localhost:3000/package/1
+
+### Crear un nuevo paquete
+POST http://localhost:3000/package
+Content-Type: application/json
+
+{
+  "description": "florero",
+  "cantidad": 2,
+  "client": 1
+}
+
+###??? Actualizar un paquete por ID
+PUT http://localhost:3000/package/1
+Content-Type: application/json
+
+{
+  "description": "florero actualizado",
+  "cantidad": 3,
+  "client": 1
+}
+
+### Eliminar un paquete por ID
+DELETE http://localhost:3000/package/1

@@ -10,16 +10,10 @@ export class BookingRefEntity {
   @Column()
   number: string;
 
-  @Column({ name: 'f-envio' })
-  envioDate: Date;
-
-  @Column({ name: 'f-recepcion' })
-  recepcionDate: Date;
-
-  @Column({ name: 'date-shipment' })
+  @Column({ name: 'shipment-date' })
   shipmentDate: Date;
 
-  @Column({ name: 'date-receipt' })
+  @Column({ name: 'receipt-date' })
   receiptDate: Date;
 
   @Column()

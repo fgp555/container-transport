@@ -18,6 +18,21 @@ const client_entity_1 = require("./modules/client/entity-dtos/client.entity");
 const package_entity_1 = require("./modules/package/entity-dtos/package.entity");
 const image_entity_1 = require("./modules/image/entity-dtos/image.entity");
 const final_report_entity_1 = require("./modules/final-report/entity-dtos/final-report.entity");
+const admin_controller_1 = require("./modules/admin/admin.controller");
+const admin_service_1 = require("./modules/admin/admin.service");
+const booking_ref_controller_1 = require("./modules/booking-ref/booking-ref.controller");
+const booking_ref_service_1 = require("./modules/booking-ref/booking-ref.service");
+const client_controller_1 = require("./modules/client/client.controller");
+const client_service_1 = require("./modules/client/client.service");
+const container_controller_1 = require("./modules/container/container.controller");
+const container_service_1 = require("./modules/container/container.service");
+const final_report_controller_1 = require("./modules/final-report/final-report.controller");
+const final_report_service_1 = require("./modules/final-report/final-report.service");
+const image_controller_1 = require("./modules/image/image.controller");
+const image_service_1 = require("./modules/image/image.service");
+const package_controller_1 = require("./modules/package/package.controller");
+const package_service_1 = require("./modules/package/package.service");
+const seeder_module_1 = require("./seed/seeder.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -53,9 +68,28 @@ exports.AppModule = AppModule = __decorate([
                 image_entity_1.ImageEntity,
                 final_report_entity_1.FinalReportEntity,
             ]),
+            seeder_module_1.SeederModule,
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [
+            app_controller_1.AppController,
+            admin_controller_1.AdminController,
+            booking_ref_controller_1.BookingRefController,
+            client_controller_1.ClientController,
+            container_controller_1.ContainerController,
+            final_report_controller_1.FinalReportController,
+            image_controller_1.ImageController,
+            package_controller_1.PackageController,
+        ],
+        providers: [
+            app_service_1.AppService,
+            admin_service_1.AdminService,
+            booking_ref_service_1.BookingRefService,
+            client_service_1.ClientService,
+            container_service_1.ContainerService,
+            final_report_service_1.FinalReportService,
+            image_service_1.ImageService,
+            package_service_1.PackageService,
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

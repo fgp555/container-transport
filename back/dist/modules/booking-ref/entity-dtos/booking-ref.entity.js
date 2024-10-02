@@ -24,19 +24,11 @@ __decorate([
     __metadata("design:type", String)
 ], BookingRefEntity.prototype, "number", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'f-envio' }),
-    __metadata("design:type", Date)
-], BookingRefEntity.prototype, "envioDate", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ name: 'f-recepcion' }),
-    __metadata("design:type", Date)
-], BookingRefEntity.prototype, "recepcionDate", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ name: 'date-shipment' }),
+    (0, typeorm_1.Column)({ name: 'shipment-date' }),
     __metadata("design:type", Date)
 ], BookingRefEntity.prototype, "shipmentDate", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: 'date-receipt' }),
+    (0, typeorm_1.Column)({ name: 'receipt-date' }),
     __metadata("design:type", Date)
 ], BookingRefEntity.prototype, "receiptDate", void 0);
 __decorate([

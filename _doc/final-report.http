@@ -1,0 +1,38 @@
+### Obtener todos los informes finales
+GET http://localhost:3000/final-report
+
+### Obtener un informe final por ID
+GET http://localhost:3000/final-report/1
+
+### Crear un nuevo informe final
+POST http://localhost:3000/final-report
+Content-Type: application/json
+
+{
+  "bLNo": "BUE238550",
+  "consignee": "BIO ABA SA",
+  "marks": "29119880",
+  "qtyPkgs": 2,
+  "remarks": "1 pallet: shrink-wrap film stretch torn off + torn paper bags",
+  "pallet": "shrink-wrap film stretch torn off + torn paper bags",
+  "legend": "I. Due to the poorly and/or improperly stuffed, the cargo required an extra handling. II. The load was un-palletized in order to safely handled and/or avoid damage to the cargo.",
+  "images": [1, 2, 3]
+}
+
+###??? Actualizar un informe final por ID
+PUT http://localhost:3000/final-report/1
+Content-Type: application/json
+
+{
+  "bLNo": "BUE238551",
+  "consignee": "BIO ABA SA Actualizado",
+  "marks": "29119881",
+  "qtyPkgs": 3,
+  "remarks": "Updated remarks for the final report",
+  "pallet": "New pallet description",
+  "legend": "Updated legend",
+  "images": [1, 2]
+}
+
+### Eliminar un informe final por ID
+DELETE http://localhost:3000/final-report/1

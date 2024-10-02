@@ -9,6 +9,21 @@ import { ClientEntity } from './modules/client/entity-dtos/client.entity';
 import { PackageEntity } from './modules/package/entity-dtos/package.entity';
 import { ImageEntity } from './modules/image/entity-dtos/image.entity';
 import { FinalReportEntity } from './modules/final-report/entity-dtos/final-report.entity';
+import { AdminController } from './modules/admin/admin.controller';
+import { AdminService } from './modules/admin/admin.service';
+import { BookingRefController } from './modules/booking-ref/booking-ref.controller';
+import { BookingRefService } from './modules/booking-ref/booking-ref.service';
+import { ClientController } from './modules/client/client.controller';
+import { ClientService } from './modules/client/client.service';
+import { ContainerController } from './modules/container/container.controller';
+import { ContainerService } from './modules/container/container.service';
+import { FinalReportController } from './modules/final-report/final-report.controller';
+import { FinalReportService } from './modules/final-report/final-report.service';
+import { ImageController } from './modules/image/image.controller';
+import { ImageService } from './modules/image/image.service';
+import { PackageController } from './modules/package/package.controller';
+import { PackageService } from './modules/package/package.service';
+import { SeederModule } from './seed/seeder.module';
 
 @Module({
   imports: [
@@ -41,8 +56,27 @@ import { FinalReportEntity } from './modules/final-report/entity-dtos/final-repo
       ImageEntity,
       FinalReportEntity,
     ]),
+    SeederModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [
+    AppController,
+    AdminController,
+    BookingRefController,
+    ClientController,
+    ContainerController,
+    FinalReportController,
+    ImageController,
+    PackageController,
+  ],
+  providers: [
+    AppService,
+    AdminService,
+    BookingRefService,
+    ClientService,
+    ContainerService,
+    FinalReportService,
+    ImageService,
+    PackageService,
+  ],
 })
 export class AppModule {}

@@ -45,8 +45,8 @@ export class SeederModule implements OnModuleInit {
     await clientRepo.save(client);
 
     // Seed Images
-    const image1 = imageRepo.create({ path: '/images/img.jpg' });
-    const image2 = imageRepo.create({ path: '/images/img2.jpg' });
+    const image1 = imageRepo.create({ path: 'https://api.1rodemayo.com/uploads/images/images-1727990781669-872611659.jpg' });
+    const image2 = imageRepo.create({ path: 'https://api.1rodemayo.com/uploads/images/images-1727990781669-872611659.jpg' });
     await imageRepo.save([image1, image2]);
 
     // Seed Booking Reference

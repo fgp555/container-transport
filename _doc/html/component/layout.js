@@ -5,11 +5,9 @@
 
 // import.js
 const jsFiles = [
-  // "https://frankgp.com/component/stat.js",
-  // "https://frankgp.com/component/loader.js",
-  "./head.js",
-  "./header.js",
-  "./footer.js",
+  "/component/head.js",
+  "/component/header.js",
+  "/component/footer.js",
   // "https://frankgp.com/lib/js/youtube-embed.js",
   // Add more optional JS files here
 ];
@@ -26,8 +24,8 @@ jsFiles.forEach((jsFile) => {
 
 // Dynamically import CSS files
 const cssFiles = [
-  "https://frankgp.com/icon/icomoon/style.css",
-  "./component/global.css",
+  // "https://frankgp.com/icon/icomoon/style.css",
+  "/component/global.css",
   // "https://frankgp.com/wp-assets/style/wp-content.css",
   // Add more CSS files here
 ];

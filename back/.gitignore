@@ -1,5 +1,3 @@
-uploads
-.env.prod
 # compiled output
 # /dist
 /node_modules

@@ -2,7 +2,7 @@
     <script src="https://frankgp.com/component/fgp_header.js"></script>
     <fgp_header-component></fgp_header-component>
 */
-let fgp_header_html = /*html */ `<section>
+let fgp_header_html = /* html */ `<section>
   <div class="btn_container">
     <div class="logo">
       <i class="btn_navbar icon-menu"></i>

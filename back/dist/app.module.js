@@ -21,8 +21,6 @@ const container_controller_1 = require("./modules/container/container.controller
 const container_service_1 = require("./modules/container/container.service");
 const final_report_controller_1 = require("./modules/final-report/final-report.controller");
 const final_report_service_1 = require("./modules/final-report/final-report.service");
-const image_controller_1 = require("./modules/image/image.controller");
-const image_service_1 = require("./modules/image/image.service");
 const package_controller_1 = require("./modules/package/package.controller");
 const package_service_1 = require("./modules/package/package.service");
 const seeder_module_1 = require("./seed/seeder.module");
@@ -35,13 +33,17 @@ const client_entity_1 = require("./modules/client/entity-dtos/client.entity");
 const package_entity_1 = require("./modules/package/entity-dtos/package.entity");
 const image_entity_1 = require("./modules/image/entity-dtos/image.entity");
 const final_report_entity_1 = require("./modules/final-report/entity-dtos/final-report.entity");
+const puppeteer_module_1 = require("./modules/puppeteer/puppeteer.module");
+const image_module_1 = require("./modules/image/image.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            image_module_1.ImageModule,
             seeder_module_1.SeederModule,
+            puppeteer_module_1.PuppeteerModule,
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 load: [typeOrm_1.default],
@@ -67,7 +69,6 @@ exports.AppModule = AppModule = __decorate([
             client_controller_1.ClientController,
             container_controller_1.ContainerController,
             final_report_controller_1.FinalReportController,
-            image_controller_1.ImageController,
             package_controller_1.PackageController,
         ],
         providers: [
@@ -77,7 +78,6 @@ exports.AppModule = AppModule = __decorate([
             client_service_1.ClientService,
             container_service_1.ContainerService,
             final_report_service_1.FinalReportService,
-            image_service_1.ImageService,
             package_service_1.PackageService,
         ],
     })

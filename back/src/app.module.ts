@@ -26,10 +26,14 @@ import { ClientEntity } from './modules/client/entity-dtos/client.entity';
 import { PackageEntity } from './modules/package/entity-dtos/package.entity';
 import { ImageEntity } from './modules/image/entity-dtos/image.entity';
 import { FinalReportEntity } from './modules/final-report/entity-dtos/final-report.entity';
+import { PuppeteerModule } from './modules/puppeteer/puppeteer.module';
+import { ImageModule } from './modules/image/image.module';
 
 @Module({
   imports: [
+    ImageModule,
     SeederModule,
+    PuppeteerModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [typeorm],
@@ -55,7 +59,7 @@ import { FinalReportEntity } from './modules/final-report/entity-dtos/final-repo
     ClientController,
     ContainerController,
     FinalReportController,
-    ImageController,
+    // ImageController,
     PackageController,
   ],
   providers: [
@@ -65,7 +69,7 @@ import { FinalReportEntity } from './modules/final-report/entity-dtos/final-repo
     ClientService,
     ContainerService,
     FinalReportService,
-    ImageService,
+    // ImageService,
     PackageService,
   ],
 })

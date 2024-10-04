@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+// back/src/modules/image/image.controller.ts
+
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Put,
+} from '@nestjs/common';
 import { ImageService } from './image.service';
 import { ImageEntity } from './entity-dtos/image.entity';
 

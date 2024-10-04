@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Images as PDF</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        text-align: center;
+        margin-top: 50px;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .error {
+        color: red;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Download PDF with Images</h1>
+      <button onclick="downloadPDF()">Download</button>
+      <p class="error" id="error-message"></p>
+    </div>
+
+    <script>
+      // Function to trigger the PDF download with fetch and handle errors
+      async function downloadPDF() {
+        // http://localhost:3000/api/puppeteer/imagesDataById/2
+        const id = 2; // Replace with dynamic ID if needed
+        const url = `/api/puppeteer/imagesDataById/${id}`;
+        const errorMessageElement = document.getElementById("error-message");
+
+        try {
+          // Make a fetch request to download the PDF
+          const response = await fetch(url);
+
+          if (!response.ok) {
+            // Handle HTTP errors
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+          }
+
+          const blob = await response.blob(); // Convert response to blob (binary data)
+
+          // Create a download link for the PDF
+          const link = document.createElement("a");
+          const urlBlob = URL.createObjectURL(blob);
+          link.href = urlBlob;
+          link.download = `imagesData-${id}.pdf`;
+          document.body.appendChild(link);
+          link.click();
+
+          // Clean up
+          document.body.removeChild(link);
+          URL.revokeObjectURL(urlBlob); // Free memory
+          errorMessageElement.textContent = ""; // Clear any error message
+        } catch (error) {
+          // Display the error message on the page
+          errorMessageElement.textContent = `Failed to download PDF: ${error.message}`;
+          console.log("Error:", error);
+        }
+      }
+    </script>
+  </body>
+</html>

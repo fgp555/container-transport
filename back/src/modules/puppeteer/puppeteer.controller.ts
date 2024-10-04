@@ -1,4 +1,4 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { join } from 'path';
 import * as fs from 'fs';
@@ -13,13 +13,21 @@ export class PuppeteerController {
     private readonly finalReportService: FinalReportService, // Inyección del servicio
   ) {}
 
-  @Get()
-  async generatePdf(@Res() res: Response) {
-    const imagesData = await this.getImagesData(); // Obtener datos de las imágenes desde la base de datos
-    console.log("imagesData", imagesData);  
+  @Get('/imagesDataById/:id')
+  async generatePdf(@Res() res: Response, @Param('id') id: number) {
+    console.log("id", id);
+    // const imagesData = await this.getImagesData(); // Obtener datos de las imágenes desde la base de datos
+    const imagesDataById = await this.getImagesDataById(id); // Obtener datos de las imágenes desde la base de datos por id
+    // console.log("imagesData", imagesData);
+    console.log("imagesDataById", imagesDataById);
 
+    if(!imagesDataById) {
+      throw new Error('No se encontraron imágenes');
+    }
+    
     // Generar el HTML dinámicamente para las imágenes
-    const imagesHtml = imagesData.map(image => `<img src="data:image/png;base64,${this.getBase64Image('../uploads/favicon.jpg')}" />`).join('');
+    const imagesHtml = imagesDataById.map(image => `<img src="data:image/png;base64,${this.getBase64Image('../' + image.path)}" />`).join('');
+
 
     const htmlContent = /* html */ `
       <html>
@@ -82,5 +90,14 @@ export class PuppeteerController {
   private async getImagesData() {
     const reports = await this.finalReportService.findAll(); // Ajusta según tu implementación
     return reports.flatMap(report => report.images); // Asegúrate de que la relación esté bien configurada
+  }
+
+  // Método para obtener las imágenes desde la base de datos por id
+  private async getImagesDataById(id: number) {
+    const report = await this.finalReportService.findOne(id); // Ajusta aquí tu implementación
+    if (!report) {
+      throw new Error('Report not found');
+    }
+    return report.images; // Asegúrate de que la aplicación esté bien configurada
   }
 }

@@ -23,10 +23,14 @@ let PuppeteerController = class PuppeteerController {
         this.pdfService = pdfService;
         this.finalReportService = finalReportService;
     }
-    async generatePdf(res) {
-        const imagesData = await this.getImagesData();
-        console.log("imagesData", imagesData);
-        const imagesHtml = imagesData.map(image => `<img src="data:image/png;base64,${this.getBase64Image('../uploads/favicon.jpg')}" />`).join('');
+    async generatePdf(res, id) {
+        console.log("id", id);
+        const imagesDataById = await this.getImagesDataById(id);
+        console.log("imagesDataById", imagesDataById);
+        if (!imagesDataById) {
+            throw new Error('No se encontraron imágenes');
+        }
+        const imagesHtml = imagesDataById.map(image => `<img src="data:image/png;base64,${this.getBase64Image('../' + image.path)}" />`).join('');
         const htmlContent = `
       <html>
       <head>
@@ -82,13 +86,21 @@ let PuppeteerController = class PuppeteerController {
         const reports = await this.finalReportService.findAll();
         return reports.flatMap(report => report.images);
     }
+    async getImagesDataById(id) {
+        const report = await this.finalReportService.findOne(id);
+        if (!report) {
+            throw new Error('Report not found');
+        }
+        return report.images;
+    }
 };
 exports.PuppeteerController = PuppeteerController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('/imagesDataById/:id'),
     __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], PuppeteerController.prototype, "generatePdf", null);
 exports.PuppeteerController = PuppeteerController = __decorate([

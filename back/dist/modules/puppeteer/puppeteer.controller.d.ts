@@ -5,7 +5,8 @@ export declare class PuppeteerController {
     private readonly pdfService;
     private readonly finalReportService;
     constructor(pdfService: PuppeteerService, finalReportService: FinalReportService);
-    generatePdf(res: Response): Promise<void>;
+    generatePdf(res: Response, id: number): Promise<void>;
     private getBase64Image;
     private getImagesData;
+    private getImagesDataById;
 }

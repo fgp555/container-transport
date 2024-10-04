@@ -27,7 +27,10 @@ let FinalReportService = class FinalReportService {
         return this.finalReportRepository.find({ relations: ['images'] });
     }
     findOne(id) {
-        return this.finalReportRepository.findOne({ where: { id }, relations: ['images'] });
+        return this.finalReportRepository.findOne({
+            where: { id },
+            relations: ['images'],
+        });
     }
     async create(finalReport, images) {
         const savedImages = await this.saveImages(images);
@@ -35,7 +38,10 @@ let FinalReportService = class FinalReportService {
         return this.finalReportRepository.save(finalReport);
     }
     async update(id, finalReport, images) {
-        const existingReport = await this.finalReportRepository.findOne({ where: { id }, relations: ['images'] });
+        const existingReport = await this.finalReportRepository.findOne({
+            where: { id },
+            relations: ['images'],
+        });
         if (!existingReport) {
             throw new Error('FinalReport not found');
         }
@@ -54,7 +60,7 @@ let FinalReportService = class FinalReportService {
         await this.finalReportRepository.delete(id);
     }
     async saveImages(files) {
-        const imageEntities = files.map(file => {
+        const imageEntities = files.map((file) => {
             const image = new image_entity_1.ImageEntity();
             image.path = file.path;
             return image;

@@ -1,1 +1,1 @@
-GET http://localhost:3000/api/puppeteer
+GET http://localhost:3000/api/puppeteer/imagesDataById/1

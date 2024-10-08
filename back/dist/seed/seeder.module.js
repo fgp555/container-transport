@@ -47,8 +47,8 @@ let SeederModule = class SeederModule {
             receivingCompany: 'company Rec1',
         });
         await clientRepo.save(client);
-        const image1 = imageRepo.create({ path: 'uploads/favicon.jpg' });
-        const image2 = imageRepo.create({ path: 'uploads/favicon.jpg' });
+        const image1 = imageRepo.create({ path: 'uploads/favicon.png' });
+        const image2 = imageRepo.create({ path: 'uploads/favicon.png' });
         await imageRepo.save([image1, image2]);
         const bookingRef = bookingRefRepo.create({
             number: 'HAME90065700',

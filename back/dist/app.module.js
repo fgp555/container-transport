@@ -35,6 +35,7 @@ const image_entity_1 = require("./modules/image/entity-dtos/image.entity");
 const final_report_entity_1 = require("./modules/final-report/entity-dtos/final-report.entity");
 const puppeteer_module_1 = require("./modules/puppeteer/puppeteer.module");
 const image_module_1 = require("./modules/image/image.module");
+const html_pdf_module_1 = require("./modules/html-pdf/html-pdf.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -44,6 +45,7 @@ exports.AppModule = AppModule = __decorate([
             image_module_1.ImageModule,
             seeder_module_1.SeederModule,
             puppeteer_module_1.PuppeteerModule,
+            html_pdf_module_1.HtmlPdfModule,
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
                 load: [typeOrm_1.default],

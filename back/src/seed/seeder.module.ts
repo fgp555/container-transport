@@ -45,8 +45,8 @@ export class SeederModule implements OnModuleInit {
     await clientRepo.save(client);
 
     // Seed Images
-    const image1 = imageRepo.create({ path: 'uploads/favicon.jpg' });
-    const image2 = imageRepo.create({ path: 'uploads/favicon.jpg' });
+    const image1 = imageRepo.create({ path: 'uploads/favicon.png' });
+    const image2 = imageRepo.create({ path: 'uploads/favicon.png' });
     await imageRepo.save([image1, image2]);
 
     // Seed Booking Reference

@@ -28,12 +28,14 @@ import { ImageEntity } from './modules/image/entity-dtos/image.entity';
 import { FinalReportEntity } from './modules/final-report/entity-dtos/final-report.entity';
 import { PuppeteerModule } from './modules/puppeteer/puppeteer.module';
 import { ImageModule } from './modules/image/image.module';
+import { HtmlPdfModule } from './modules/html-pdf/html-pdf.module';
 
 @Module({
   imports: [
     ImageModule,
     SeederModule,
     PuppeteerModule,
+    HtmlPdfModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [typeorm],

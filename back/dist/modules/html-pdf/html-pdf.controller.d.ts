@@ -8,5 +8,5 @@ export declare class HtmlPdfController {
     createPdf(data: any, res: Response): Promise<void>;
     generatePdf(res: Response, id: number): Promise<void>;
     private getBase64Image;
-    private getImagesDataById;
+    private finalReportServiceFindOne;
 }

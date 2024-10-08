@@ -24,10 +24,10 @@ Content-Type: application/json
   "legend": "Special instruction",
   "images": [
     {
-      "path": "/images/image1.jpg"
+      "path": "uploads/favicon.png"
     },
     {
-      "path": "/images/image2.jpg"
+      "path": "uploads/favicon.png"
     }
   ]
 }
@@ -48,10 +48,10 @@ Content-Type: application/json
   "legend": "Updated legend",
   "images": [
     {
-      "path": "/images/new-image1.jpg"
+      "path": "uploads/favicon.png"
     },
     {
-      "path": "/images/new-image2.jpg"
+      "path": "uploads/favicon.png"
     }
   ]
 }

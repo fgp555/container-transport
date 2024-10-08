@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        font-size: 16px;
+      }
+      .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        font-size: 16px;
+        line-height: 24px;
+        color: #555;
+      }
+      .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+      }
+      .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+      }
+      .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+      }
+      .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+      }
+      .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+      }
+      .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+      }
+      .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+      }
+      .invoice-box table tr.details td {
+        padding-bottom: 20px;
+      }
+      .invoice-box table tr.item td {
+        border-bottom: 1px solid #eee;
+      }
+      .invoice-box table tr.item.last td {
+        border-bottom: none;
+      }
+      .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+      }
+      .images {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .images img {
+        width: 30%;
+        height: auto;
+        border: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-box">
+      <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td class="title">
+                  <h1>Factura</h1>
+                </td>
+                <td>
+                  Número de Factura: #123<br />
+                  Fecha de emisión: 1 de Octubre, 2024<br />
+                  Fecha de vencimiento: 15 de Octubre, 2024
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="information">
+          <td colspan="2">
+            <table>
+              <tr>
+                <td>
+                  Empresa XYZ, Inc.<br />
+                  123 Calle Empresa<br />
+                  Ciudad, CP 12345
+                </td>
+                <td>
+                  Cliente: Juan Pérez<br />
+                  Dirección del Cliente<br />
+                  Ciudad, CP 67890
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="heading">
+          <td>Descripción</td>
+          <td>Precio</td>
+        </tr>
+
+        <tr class="item">
+          <td>Producto/Servicio 1</td>
+          <td>$300.00</td>
+        </tr>
+
+        <tr class="item">
+          <td>Producto/Servicio 2</td>
+          <td>$150.00</td>
+        </tr>
+
+        <tr class="item last">
+          <td>Producto/Servicio 3</td>
+          <td>$50.00</td>
+        </tr>
+
+        <tr class="total">
+          <td></td>
+          <td>Total: $500.00</td>
+        </tr>
+      </table>
+
+      <div class="images images_container">
+        ${imagesHtml}
+        <!-- Incluir imágenes dinámicamente -->
+      </div>
+    </div>
+  </body>
+</html>

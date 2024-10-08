@@ -32,17 +32,32 @@ export class HtmlPdfController {
 
   @Get('/final-report/:id')
   async generatePdf(@Res() res: Response, @Param('id') id: number) {
-    console.log('id', id);
+    // Obtener datos de las imágenes desde la base de datos por id
+    const finalReportById = await this.finalReportServiceFindOne(id);
+    console.log('finalReportById', finalReportById);
+    /* 
+    {
+  id: 1,
+  bLNo: 'BUE238550',
+  consignee: 'BIO ABA SA',
+  marks: '29119880',
+  qtyPkgs: 2,
+  remarks: '1 pallet: shrink-wrap film stretch torn off + torn paper bags',
+  pallet: 'shrink-wrap film stretch torn off + torn paper bags',
+  legend: 'I. Due to the poorly and/or improperly stuffed, the cargo required an extra handling. II. The load was un-palletized in order to safely handled and/or avoid damage to the cargo.',
+  images: [
+    ImageEntity { id: 1, path: 'uploads/favicon.png' },
+    ImageEntity { id: 2, path: 'uploads/favicon.png' }
+  ]
+}
+     */
 
-    const imagesDataById = await this.getImagesDataById(id); // Obtener datos de las imágenes desde la base de datos por id
-    console.log('imagesDataById', imagesDataById);
-
-    if (!imagesDataById) {
+    if (!finalReportById) {
       throw new Error('No se encontraron imágenes');
     }
 
     // Generar el HTML dinámicamente para las imágenes
-    const imagesHtml = imagesDataById
+    const imagesHtml = finalReportById.images
       .map(
         (image) =>
           `<img src="data:image/png;base64,${this.getBase64Image(image.path)}" />`,
@@ -56,9 +71,8 @@ export class HtmlPdfController {
           body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            font-size: 16px;
           }
-          .invoice-box {
+          .report-box {
             max-width: 800px;
             margin: auto;
             padding: 30px;
@@ -69,44 +83,44 @@ export class HtmlPdfController {
             line-height: 24px;
             color: #555;
           }
-          .invoice-box table {
+          .report-box table {
             width: 100%;
             line-height: inherit;
             text-align: left;
           }
-          .invoice-box table td {
+          .report-box table td {
             padding: 5px;
             vertical-align: top;
           }
-          .invoice-box table tr td:nth-child(2) {
+          .report-box table tr td:nth-child(2) {
             text-align: right;
           }
-          .invoice-box table tr.top table td {
+          .report-box table tr.top table td {
             padding-bottom: 20px;
           }
-          .invoice-box table tr.top table td.title {
-            font-size: 45px;
+          .report-box table tr.top table td.title {
+            font-size: 30px;
             line-height: 45px;
             color: #333;
           }
-          .invoice-box table tr.information table td {
+          .report-box table tr.information table td {
             padding-bottom: 40px;
           }
-          .invoice-box table tr.heading td {
+          .report-box table tr.heading td {
             background: #eee;
             border-bottom: 1px solid #ddd;
             font-weight: bold;
           }
-          .invoice-box table tr.details td {
+          .report-box table tr.details td {
             padding-bottom: 20px;
           }
-          .invoice-box table tr.item td {
+          .report-box table tr.item td {
             border-bottom: 1px solid #eee;
           }
-          .invoice-box table tr.item.last td {
+          .report-box table tr.item.last td {
             border-bottom: none;
           }
-          .invoice-box table tr.total td:nth-child(2) {
+          .report-box table tr.total td:nth-child(2) {
             border-top: 2px solid #eee;
             font-weight: bold;
           }
@@ -123,38 +137,20 @@ export class HtmlPdfController {
         </style>
       </head>
       <body>
-        <div class="invoice-box">
+        <div class="report-box">
           <table cellpadding="0" cellspacing="0">
             <tr class="top">
               <td colspan="2">
                 <table>
                   <tr>
                     <td class="title">
-                      <h1>Factura</h1>
+                      <img src="data:image/png;base64,${this.getBase64Image('uploads/favicon.png')}" style="width:100%; max-width:100px;">
                     </td>
                     <td>
-                      Número de Factura: #123<br />
-                      Fecha de emisión: 1 de Octubre, 2024<br />
-                      Fecha de vencimiento: 15 de Octubre, 2024
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-    
-            <tr class="information">
-              <td colspan="2">
-                <table>
-                  <tr>
-                    <td>
-                      Empresa XYZ, Inc.<br />
-                      123 Calle Empresa<br />
-                      Ciudad, CP 12345
-                    </td>
-                    <td>
-                      Cliente: Juan Pérez<br />
-                      Dirección del Cliente<br />
-                      Ciudad, CP 67890
+                      FLAVIO A. PREZIOSA<br />
+                      Habana 2874 - 1419 - Buenos Aires - Argentina<br />
+                      M: +54 911 6677 2741<br />
+                      E: flaviopreziosa@gmail.com
                     </td>
                   </tr>
                 </table>
@@ -162,28 +158,58 @@ export class HtmlPdfController {
             </tr>
     
             <tr class="heading">
-              <td>Descripción</td>
-              <td>Precio</td>
+              <td colspan="2">
+                Detalles del Informe de Recepción de Paquete
+              </td>
             </tr>
     
             <tr class="item">
-              <td>Producto/Servicio 1</td>
-              <td>$300.00</td>
+              <td>id:</td>
+              <td>${finalReportById.id}</td>
             </tr>
     
             <tr class="item">
-              <td>Producto/Servicio 2</td>
-              <td>$150.00</td>
+              <td>B/L No:</td>
+              <td>${finalReportById.bLNo}</td>
+            </tr>
+    
+            <tr class="item">
+              <td>Consignee:</td>
+              <td>${finalReportById.consignee}</td>
+            </tr>
+    
+            <tr class="item">
+              <td>Marks:</td>
+              <td>${finalReportById.marks}</td>
+            </tr>
+    
+            <tr class="item">
+              <td>Qty. of pkgs.:</td>
+              <td>${finalReportById.qtyPkgs}</td>
+            </tr>
+    
+            <tr class="item">
+              <td>Remarks:</td>
+              <td>${finalReportById.remarks}</td>
+            </tr>
+    
+            <tr class="item">
+              <td>Pallet:</td>
+              <td>${finalReportById.pallet}</td>
+            </tr>
+    
+            <tr class="heading">
+              <td colspan="2">
+                Leyenda:
+              </td>
             </tr>
     
             <tr class="item last">
-              <td>Producto/Servicio 3</td>
-              <td>$50.00</td>
-            </tr>
-    
-            <tr class="total">
-              <td></td>
-              <td>Total: $500.00</td>
+              <td colspan="2">
+                <!-- I. Debido a que la carga fue mal y/o incorrectamente embalada, se requirió un manejo adicional.<br /> -->
+                <!-- II. La carga fue despaletizada para manejarla de manera segura y/o evitar daños a la carga. -->
+                ${finalReportById.legend}
+              </td>
             </tr>
           </table>
     
@@ -217,11 +243,11 @@ export class HtmlPdfController {
   }
 
   // Método para obtener las imágenes desde la base de datos por id
-  private async getImagesDataById(id: number) {
+  private async finalReportServiceFindOne(id: number) {
     const report = await this.finalReportService.findOne(id); // Ajusta según tu implementación
     if (!report) {
       throw new Error('Report not found');
     }
-    return report.images; // Asegúrate de que la relación esté bien configurada
+    return report; // Asegúrate de que la relación esté bien configurada
   }
 }

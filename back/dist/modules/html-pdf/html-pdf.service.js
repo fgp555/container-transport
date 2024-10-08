@@ -9,33 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HtmlPdfService = void 0;
 const common_1 = require("@nestjs/common");
 const pdf = require("html-pdf");
-const fs = require("fs");
-const path = require("path");
 let HtmlPdfService = class HtmlPdfService {
     async generatePdf(data) {
-        const logoPath = path.resolve(__dirname, '..', '..', '..', 'uploads', 'favicon.jpg');
-        const logoBase64 = this.getBase64Image(logoPath);
-        const htmlContentWithLogo = `
-      <html>
-      <head>
-        <style>
-          body { 
-            font-family: Arial, sans-serif; 
-            font-size: 12px; /* Ajusta el tamaño exacto de la fuente */
-          }
-          h1 { color: #333; }
-          .logo { text-align: center; margin-bottom: 20px; }
-          .logo img { width: 150px; }
-        </style>
-      </head>
-      <body>
-        <div class="logo">
-          <img src="data:image/png;base64,${logoBase64}" />
-        </div>
-        ${data.content} <!-- Contenido HTML dinámico recibido -->
-      </body>
-      </html>
-    `;
         const options = {
             format: 'A3',
             border: {
@@ -48,7 +23,7 @@ let HtmlPdfService = class HtmlPdfService {
             zoomFactor: '1',
         };
         return new Promise((resolve, reject) => {
-            pdf.create(htmlContentWithLogo, options).toBuffer((err, buffer) => {
+            pdf.create(data.content, options).toBuffer((err, buffer) => {
                 if (err) {
                     reject(err);
                 }
@@ -57,10 +32,6 @@ let HtmlPdfService = class HtmlPdfService {
                 }
             });
         });
-    }
-    getBase64Image(imgPath) {
-        const image = fs.readFileSync(imgPath);
-        return Buffer.from(image).toString('base64');
     }
 };
 exports.HtmlPdfService = HtmlPdfService;

@@ -38,6 +38,7 @@ let FinalReportService = class FinalReportService {
         return this.finalReportRepository.save(finalReport);
     }
     async update(id, finalReport, images) {
+        console.log('id', id, 'finalReport', finalReport, 'images', images);
         const existingReport = await this.finalReportRepository.findOne({
             where: { id },
             relations: ['images'],
@@ -53,7 +54,10 @@ let FinalReportService = class FinalReportService {
         else {
             finalReport.images = existingReport.images;
         }
-        await this.finalReportRepository.update(id, finalReport);
+        await this.finalReportRepository.save({
+            ...existingReport,
+            ...finalReport,
+        });
         return this.findOne(id);
     }
     async remove(id) {

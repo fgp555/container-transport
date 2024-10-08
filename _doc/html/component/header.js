@@ -1,7 +1,3 @@
-/*
-    <script src="https://frankgp.com/component/fgp_header.js"></script>
-    <fgp_header-component></fgp_header-component>
-*/
 let fgp_header_html = /* html */ `<section>
   <div class="btn_container">
     <div class="logo">
@@ -130,12 +126,3 @@ btn_navbar.addEventListener("click", () => {
   const navbar = document.querySelector("#navbar");
   navbar.classList.toggle("display_none");
 });
-
-// ========== Search ==========
-let searchInput = document.querySelector(".searchInput");
-searchInput.onchange = () => {
-  const url = `https://www.youtube.com/results?search_query=${searchInput.value}%20Frank%20GP`;
-  // window.open(url, '_blank');
-  window.location.href = url;
-  // console.log(url);
-};

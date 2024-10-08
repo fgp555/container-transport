@@ -43,6 +43,8 @@ export class FinalReportService {
     finalReport: FinalReportEntity,
     images: Express.Multer.File[],
   ): Promise<FinalReportEntity> {
+    console.log('id', id, 'finalReport', finalReport, 'images', images);
+
     const existingReport = await this.finalReportRepository.findOne({
       where: { id },
       relations: ['images'],
@@ -63,7 +65,12 @@ export class FinalReportService {
       finalReport.images = existingReport.images; // Mantener las imágenes antiguas si no se suben nuevas
     }
 
-    await this.finalReportRepository.update(id, finalReport);
+    // Actualiza los campos del finalReportEntity excepto la relación OneToMany
+    await this.finalReportRepository.save({
+      ...existingReport,
+      ...finalReport,
+    });
+
     return this.findOne(id);
   }
 
